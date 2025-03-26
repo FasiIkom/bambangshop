@@ -78,6 +78,17 @@ This is the place for you to write reflections:
 
 #### Reflection Publisher-1
 
+**Jawaban:**
+
+1. **Interface (atau trait) vs Model Struct pada Subscriber**  
+   Dalam diagram Observer pada buku Head First Design Patterns, Subscriber didefinisikan sebagai interface untuk memastikan fleksibilitas dan mengizinkan berbagai jenis implementasi yang dapat berubah secara dinamis. Di Rust, jika kita hanya membutuhkan satu model sederhana (Subscriber) dengan data statis, satu struct mungkin sudah cukup. Namun, jika di masa depan kita berencana untuk memiliki berbagai tipe Subscriber dengan perilaku berbeda, mendefinisikan sebuah trait akan memberikan keuntungan dengan mendukung polimorfisme dan loose coupling.
+
+2. **Penggunaan Vec vs DashMap untuk data unik**  
+   Karena `id` pada Program dan `url` pada Subscriber dimaksudkan untuk bersifat unik, menggunakan Vec saja tidak memadai karena pencarian dan pemeliharaan keunikan di dalam list membutuhkan iterasi manual yang berpotensi tidak efisien. Sebaliknya, DashMap (atau struktur data map/sejenis HashMap) lebih tepat karena secara otomatis menyediakan lookup dengan kompleksitas waktu konstan dan dapat membantu memastikan keunikan kunci.
+
+3. **DashMap vs Singleton untuk akses thread-safe**  
+   Meskipun pola Singleton bisa digunakan untuk mengelola instance tunggal, itu tidak secara otomatis mengatasi isu thread safety saat akses data secara konkuren. Di Rust, karena compiler menekankan keamanan thread, kita perlu menggunakan struktur seperti DashMap yang secara eksplisit dirancang untuk akses data yang aman dalam lingkungan multi-thread. Oleh karena itu, meskipun konsep Singleton bisa digunakan, DashMap merupakan pilihan yang lebih tepat untuk memastikan data (seperti list Subscribers) diakses dengan aman oleh beberapa thread.
+
 #### Reflection Publisher-2
 
 #### Reflection Publisher-3
