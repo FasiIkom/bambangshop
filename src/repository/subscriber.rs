@@ -1,6 +1,6 @@
 use dashmap::DashMap;
 use lazy_static::lazy_static;
-use create::model::subscriber::Subscriber;
+use crate::model::subscriber::Subscriber;
 
 // Singleton of Database
 lazy_static! {
@@ -16,7 +16,7 @@ impl SubscriberRepository {
             SUBSCRIBERS.insert(String::from(product_type), DashMap::new());
         };
 
-        SUBSCRIBERS.get(product_type.unwrap())
+        SUBSCRIBERS.get(product_type).unwrap()
             .insert(subscriber_value.url.clone(), subscriber_value);
         return subscriber;
     }
