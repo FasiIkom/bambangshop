@@ -113,3 +113,23 @@ This is the place for you to write reflections:
    - Bagi proyek kelompok atau proyek di masa depan, Postman membantu dalam pemantauan, dokumentasi, dan kolaborasi sehingga memastikan integrasi antar komponen API bekerja dengan baik.
 
 #### Reflection Publisher-3
+
+**Jawaban:**
+
+1. **Observer Pattern Variations (Push vs. Pull):**  
+   Dalam tutorial ini, kita menggunakan variasi **Push model**, di mana publisher langsung mengirim data notifikasi (misalnya status "CREATED", "DELETED", "PROMOTION" beserta data produk) kepada setiap subscriber yang telah terdaftar melalui pemanggilan method `NotificationService.notify()`. Publisher mendorong data ke subscribers tanpa meminta data secara eksplisit.
+
+2. **Keunggulan dan Kekurangan jika Menggunakan Pull Model:**  
+   - **Keunggulan (Pull Model):**  
+     - Subscriber memiliki kontrol penuh untuk mengambil (pull) data yang diperlukan pada saat yang tepat, sehingga bisa mengurangi pengiriman data yang tidak dibutuhkan.
+     - Dapat mengurangi beban komunikasi jika subscriber hanya tertarik pada subset data tertentu dan memilih frekuensi polling yang optimal.
+   - **Kekurangan (Pull Model):**  
+     - Latensi yang lebih tinggi karena subscriber harus secara periodik mengecek update, sehingga notifikasi tidak real-time.
+     - Lebih kompleks untuk mengelola mekanisme polling dan penjadwalan, terutama jika jumlah subscriber meningkat.
+     - Dalam sistem yang mengutamakan responsivitas seperti contoh tutorial ini, pull model dapat membuat proses update dan sinkronisasi data menjadi kurang efisien.
+
+3. **Tanpa Multi-threading dalam Proses Notifikasi:**  
+   Jika proses notifikasi dijalankan secara sinkron (tanpa multi-threading), maka:  
+   - Proses utama (main thread) akan menunggu hingga seluruh notifikasi terkirim, yang dapat menyebabkan penundaan (blocking) dalam pemrosesan request baru.  
+   - Kinerja sistem dapat menurun, terutama jika ada subscriber yang lambat merespons atau terdapat banyak subscriber, sehingga waktu tunggu untuk notifikasi meningkat.  
+   - Secara keseluruhan, tidak menggunakan multi-threading bisa mengakibatkan aplikasi menjadi tidak responsif dan efisiensi throughput menurun.
