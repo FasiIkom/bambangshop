@@ -91,4 +91,25 @@ This is the place for you to write reflections:
 
 #### Reflection Publisher-2
 
+**Jawaban:**
+
+1. **Pemisahan Service dan Repository dari Model**  
+   Dalam pola MVC tradisional, Model menangani representasi data dan sebagian logika bisnis dasar. Namun, untuk memastikan _separation of concerns_ dan menerapkan prinsip Single Responsibility, Service dan Repository dipisahkan dari Model.  
+   - **Repository** bertanggung jawab khusus untuk interaksi dengan penyimpanan data (misal: database), sehingga semua logika terkait akses data terpusat pada satu tempat.  
+   - **Service** mengenkapsulasi logika bisnis yang memanfaatkan data dari Model dan Repository, memungkinkan modifikasi logika bisnis tanpa mengganggu struktur data.  
+   Pemisahan ini membuat kode menjadi lebih modular, mudah diuji, dan lebih siap untuk perubahan di masa depan.
+
+2. **Dampak jika Hanya Menggunakan Model**  
+   Jika kita hanya mengandalkan Model untuk menangani segala hal:  
+   - Setiap Model (seperti Program, Subscriber, Notification) harus menanggung tanggung jawab ganda antara representasi data dan logika bisnis, yang berujung pada _tight coupling_.  
+   - Perubahan dalam logika bisnis salah satu Model berpotensi mempengaruhi Model lain karena tidak ada pemisahan yang jelas antara pengelolaan data dan operasional.  
+   - Akibatnya, kompleksitas kode meningkat, pengujian menjadi lebih sulit, dan pemeliharaan proyek bisa terhambat seiring bertambahnya fitur dan interaksi antar model.
+
+3. **Manfaat Postman dalam Pengujian**  
+   Postman adalah alat yang sangat berguna untuk menguji API karena:  
+   - Memungkinkan pengiriman request HTTP dengan berbagai metode dan memeriksa respons secara real-time, sehingga memudahkan debugging endpoint API.  
+   - Fitur Collection, Environment, dan Pre-request/Post-request Scripts memungkinkan otomasi pengujian dan pengelolaan variabel lingkungan yang dinamis.  
+   - Collection Runner dan kemampuan menulis skrip test mendukung pengujian otomatis (regression testing) yang sangat bermanfaat dalam pengembangan berkelanjutan (CI/CD).  
+   - Bagi proyek kelompok atau proyek di masa depan, Postman membantu dalam pemantauan, dokumentasi, dan kolaborasi sehingga memastikan integrasi antar komponen API bekerja dengan baik.
+
 #### Reflection Publisher-3
