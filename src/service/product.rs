@@ -56,7 +56,7 @@ impl ProductService {
         }
         let product: Product = product_opt.unwrap();
 
-        NotificationService::notify(&product.product_type, "PROMOTION", product.clone());
+        NotificationService.notify(&product.product_type, "PROMOTION", product.clone());
         return Ok(product);
     }
 }
